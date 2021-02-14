@@ -2,6 +2,9 @@ $UserFolder = $env:USERPROFILE
 $SafeDiscordCore = "module.exports = require('./core.asar');"
 $SafeDiscordModules = "module.exports = require('./discord_modules.node');"
 
+Write-Host "Blocking Discord C2C / IOCs"
+New-NetFirewallRule -DisplayName "Block C2C-Disocrd" -Direction Outbound –LocalPort Any -Protocol TCP -Action Block -RemoteAddress 185.243.115.230
+
 $DiscordVer = Read-Host -Prompt 'Please enter your Discord Version'
 
 Write-Host "Checking discord_desktop_core"
